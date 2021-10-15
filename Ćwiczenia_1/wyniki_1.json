@@ -1,0 +1,19 @@
+{ _id: ObjectId("6168a2eeea3bfb00308f1371"),
+  sex: 'Male',
+  first_name: 'Anthony',
+  last_name: 'Nichols',
+  job: 'Internal Auditor',
+  email: 'anichols3@google.co.uk',
+  location: 
+   { city: 'Jepuro',
+     address: { streetname: 'La Follette', streetnumber: '03661' } },
+  description: 'ac leo pellentesque ultrices mattis odio donec vitae nisi nam ultrices libero non mattis pulvinar',
+  height: '162.68',
+  weight: '68.37',
+  birth_date: '2013-05-23T16:10:58Z',
+  nationality: 'Indonesia',
+  credit: 
+   [ { type: 'jcb',
+       number: '4017957170327',
+       currency: 'RUB',
+       balance: '4463.86' } ] }
