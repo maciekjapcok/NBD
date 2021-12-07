@@ -1,0 +1,60 @@
+//1 Znajdź trasy którymi można dostać się z Darjeeling na Sandakphu, mające najmniejszą ilość etapów 
+MATCH (source:town {name: "Darjeeling"}), (target:peak {name: "Sandakphu"}) MATCH s = allShortestPaths((source)-[*]->(target)) RETURN s
+
+//2 Znajdź mające najmniej etapów trasy którymi można dostać się z Darjeeling na Sandakphu i które mogą być wykorzystywane zimą 
+MATCH (source:town {name: "Darjeeling"}), (target:peak {name: "Sandakphu"}), s = allShortestPaths((source)-[*]->(target))
+WITH s, relationships(s) as r
+WHERE ALL (x in r WHERE x.winter = "true")
+RETURN s, r
+
+//3 Uszereguj trasy którymi można dostać się z Darjeeling na Sandakphu według dystansu Znajdź wszystkie miejsca do których można dotrzeć przy pomocy roweru (twowheeler) z Darjeeling latem
+
+//pierwsza czesc
+MATCH s = (source:town {name: "Darjeeling"})-[r*]->(target:peak {name: "Sandakphu"})
+UNWIND r as x
+WITH s, COLLECT(x.distance) AS distances
+WITH s, reduce(acc = 0, d in distances | acc + d) as distance
+RETURN s, distance
+ORDER BY distance ASC
+
+//druga czesc
+MATCH s = (source:town {name: "Darjeeling"})-[r:twowheeler*]->(target)
+WHERE ALL (r IN relationships(s) WHERE r.summer = "true")
+RETURN target
+
+
+
+
+******TASK3*********
+
+
+
+//4
+MATCH (a:Airport)<-[:ORIGIN]-(f:Flight)
+WITH a, count(f) as loty
+RETURN a, loty
+ORDER BY loty ASC
+
+
+//5
+MATCH s = (origin:Airport { name:"LAX" })<-[r1:ORIGIN]-(:Flight)-[r2:ORIGIN|DESTINATION*..10]->(destination:Airport)
+WHERE REDUCE(acc = 0, n IN [x IN NODES(s) WHERE 'Flight' IN LABELS(x)] |
+  acc + [(n)<-[:ASSIGN]-(ticket) | ticket.price][0]
+  ) < 3000
+RETURN s
+
+//6
+MATCH s = (origin:Airport { name:"LAX" })<-[r1:ORIGIN]-(:Flight)-[r2:ORIGIN|DESTINATION*..10]->(destination:Airport {name: "DAY"})
+WITH s, REDUCE(acc = 0, n IN [x IN NODES(s) WHERE 'Flight' IN LABELS(x)] |
+  acc + [(n)<-[:ASSIGN]-(ticket) | ticket.price][0]
+  ) as price
+RETURN s, price
+ORDER BY price desc
+
+//7
+MATCH s = (origin:Airport { name:"LAX" })<-[r1:ORIGIN]-(:Flight)-[r2:ORIGIN|DESTINATION*..10]->(destination:Airport {name: "DAY"})
+WITH s, REDUCE(acc = 0, n IN [x IN NODES(s) WHERE 'Flight' IN LABELS(x)] |
+  acc + [(n)<-[:ASSIGN]-(ticket) | ticket.price][0]
+  ) as price
+RETURN s, price
+ORDER BY price asc LIMIT 1
