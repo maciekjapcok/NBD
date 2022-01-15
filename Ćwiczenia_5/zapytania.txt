@@ -1,0 +1,37 @@
+1)
+curl -i -XPUT -H "Content-Type: application/json" -d '{"name": "Krzysztof", "surname": "Madej", "kids": 0, "is-bald": false}' http://localhost:8098/buckets/s24088/keys/p1 
+
+curl -i -XPUT -H "Content-Type: application/json" -d '{"name": "Maciej", "surname": "Szef", "kids": 2, "is-bald": true}' http://localhost:8098/buckets/s24088/keys/p2 
+
+curl -i -XPUT -H "Content-Type: application/json" -d '{"name": "Dawid", "surname": "Lolek", "kids": 5, "is-bald": true}' http://localhost:8098/buckets/s24088/keys/p3 
+
+curl -i -XPUT -H "Content-Type: application/json" -d '{"name": "Anna", "surname": "Kowalska", "kids": 3, "is-bald": false}' http://localhost:8098/buckets/s24088/keys/p4 
+
+curl -i -XPUT -H "Content-Type: application/json" -d '{"name": "Kamil", "surname": "Nowak", "kids": 1, "is-bald": true}' http://localhost:8098/buckets/s24088/keys/p5 
+
+2)
+curl -i -XGET  http://localhost:8098/buckets/s24088/keys/p1
+
+3)
+curl -i -XPUT -H "Content-Type: application/json" -d '{"name": "Krzysztof", "surname": "Madej", "kids": 0, "is-bald": false, "is-rich": false}' http://localhost:8098/buckets/s24088/keys/p1
+
+4)
+curl -i -XPUT -H "Content-Type: application/json" -d '{"name": "Maciej", "surname": "Szef", "kids": 2}' http://localhost:8098/buckets/s24088/keys/p2
+
+5)
+curl -i -XPUT -H "Content-Type: application/json" -d '{"name": "Dawid", "surname": "Lolek", "kids": 0, "is-bald": true}' http://localhost:8098/buckets/s24088/keys/p3
+
+6)
+curl -i -XDELETE http://localhost:8098/buckets/s24088/keys/p5
+
+7)
+curl -i -XGET  http://localhost:8098/buckets/s24088/keys/p10
+
+8)
+curl -i -XPOST -H "Content-Type: application/json" -d '{"lol": 1}' http://localhost:8098/buckets/s24088/keys
+
+9)
+curl -i -XGET  http://localhost:8098/buckets/s24088/keys/T5ksfT1A9BNxE0MGqjdFutPJAYX
+
+10)
+curl -i -XDELETE http://localhost:8098/buckets/s24088/keys/T5ksfT1A9BNxE0MGqjdFutPJAYX
