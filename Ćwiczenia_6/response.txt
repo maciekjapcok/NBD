@@ -1,0 +1,5 @@
+New object
+Updated object: {u'name': u'Maciek', u'nr': 48}
+Get student: {u'name': u'Maciek', u'nr': 49}
+Deleted.
+Get student: None
